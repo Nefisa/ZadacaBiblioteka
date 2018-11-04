@@ -1,3 +1,9 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Knjiga {
@@ -12,11 +18,12 @@ public class Knjiga {
 
 	}
 
-	protected Knjiga(int brojKnjige, String nazivKnjige) {
+	protected Knjiga(int brojKnjige, String nazivKnjige) throws IOException {
 		this.brojKnjige = brojKnjige;
 		this.nazivKnjige = nazivKnjige;
 		this.statusKnjige = true;
 		listaKnjiga.add(this);
+		upisiUFile(this.brojKnjige, this.nazivKnjige);
 	}
 
 	public static boolean provjeriDostupnostKnjige(int brojKnjige) { // provjerava da li je knjiga dostupna
@@ -56,6 +63,32 @@ public class Knjiga {
 			}
 		}
 	}
+	
+	public static void kreirajFile() {
+		
+		java.io.File file = new java.io.File("ListaKnjiga.txt");
+	}
+	
+	public void upisiUFile(int brojKnjige, String nazivKnjige) throws IOException {
+		
+		try(FileWriter fw = new FileWriter("ListaKnjiga.txt", true);
+			    BufferedWriter bw = new BufferedWriter(fw);
+			    PrintWriter out = new PrintWriter(bw))
+			{
+			out.println(brojKnjige + " " + nazivKnjige);
+			out.close();
+			bw.close();
+			fw.close();
+			}
+		
+			  
+	}
+	
+	public static void izbrisiFile() throws IOException {
+		
+		Files.deleteIfExists(Paths.get("C:\\Users\\Nefisa\\eclipse-workspace\\ZadacaBiblioteka\\ListaKnjiga.txt"));
+	}
+	
 
 	public boolean isStatusKnjige() {
 		return statusKnjige;

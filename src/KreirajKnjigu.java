@@ -1,9 +1,10 @@
+import java.io.IOException;
 
 public class KreirajKnjigu extends Knjiga{
 	
 	// kreira knjigu samo ako broj knjige ispunjava uslove
 	
-	public void kreirajKnjigu(int brojKnjige, String naziv) {
+	public void kreirajKnjigu(int brojKnjige, String naziv) throws IOException {
 		if (validacijaBrojaKnjige(brojKnjige)) {
 			Knjiga knjiga = new Knjiga(brojKnjige,naziv);
 			System.out.println("Knjiga dodana u bazu i dostupna za preuzimanje.");

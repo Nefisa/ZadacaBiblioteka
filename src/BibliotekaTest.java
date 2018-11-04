@@ -1,15 +1,18 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class BibliotekaTest {
 	
 	static Scanner input = new Scanner(System.in);
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
+		
+		Knjiga.kreirajFile();
 		
 		bibliotekaTest();
 	}
 	
-	public static void bibliotekaTest() {
+	public static void bibliotekaTest() throws IOException {
 		
 		System.out.println("Dobrodosli u Biblioteku, izaberite jednu od opcija:");
 		System.out.println("1. Novi korisnik - kreiranje racuna ");
@@ -43,14 +46,14 @@ public class BibliotekaTest {
 			Biblioteka.ispisiListe();
 			break;
 		case 6:
+			Knjiga.izbrisiFile();
 			break;
 			
 		}
-		
-
+	
 	}
 	
-	public static void noviKorisnik() {
+	public static void noviKorisnik() throws IOException {
 		
 		System.out.println("Unesite broj racuna: ");
 		int brojRacuna = input.nextInt();
@@ -64,7 +67,7 @@ public class BibliotekaTest {
 		bibliotekaTest();
 	}
 	
-	public static void novaKnjiga() {
+	public static void novaKnjiga() throws IOException {
 		
 		System.out.println("Unesite broj knjige: ");
 		int brojKnjige = input.nextInt();
@@ -81,7 +84,7 @@ public class BibliotekaTest {
 		
 	}
 	
-	public static void podizanjeKnjige() {
+	public static void podizanjeKnjige() throws IOException {
 		
 		System.out.println("Unesite broj racuna: ");
 		int brojRacuna = input.nextInt();
@@ -95,7 +98,7 @@ public class BibliotekaTest {
 	}
 
 	
-	public static void vracanjeKnjige() {
+	public static void vracanjeKnjige() throws IOException {
 		
 		System.out.println("Unesite broj racuna: ");
 		int brojRacuna = input.nextInt();
