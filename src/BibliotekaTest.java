@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class BibliotekaTest {
@@ -22,11 +23,17 @@ public class BibliotekaTest {
 		System.out.println("5. Ispis liste posudjenih i vracenih knjiga");
 		System.out.println("6. Izlazak iz aplikacije");
 		
-		int izbor = input.nextInt();
+		int izbor = 0;
+		try {
+		izbor = input.nextInt();
 		
 		while (izbor < 1 || izbor >6 ){
 			System.out.println("Pogresan unos. Pokusajte ponovo.");
 			izbor = input.nextInt();
+		}
+		}
+		catch (InputMismatchException e) {
+			System.out.println("Potrebno unijeti cjelobrojnu numerièku vrijednost.");
 		}
 
 		switch (izbor) {
@@ -48,8 +55,8 @@ public class BibliotekaTest {
 		case 6:
 			Knjiga.izbrisiFile();
 			break;
-			
 		}
+		
 	
 	}
 	
