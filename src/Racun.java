@@ -12,10 +12,34 @@ public class Racun {
 
 	}
 
-	protected Racun(int brojRacuna, String ime) { 
+	private Racun(int brojRacuna, String ime) {
 		this.brojRacuna = brojRacuna;
 		this.imeKorisnika = ime;
 		racuni.add(this);
+	}
+
+	// kreira racun samo ako su svi uslovi ispunjeni
+	public static void kreirajRacun(int brojRacuna, String imeKorisnika) {
+		if (validacijaBrojaRacuna(brojRacuna)) {
+			Racun racun = new Racun(brojRacuna, imeKorisnika);
+			System.out.println("Racun je kreiran.");
+		} else
+			System.out.println("Racun nije moguce kreirati.");
+	}
+
+	// provjerava da li je broj racuna ispravan unos
+	public static boolean validacijaBrojaRacuna(int brojRacuna) {
+		if (brojRacuna < 0) {
+			System.out.println("Broj racuna ne smije biti negativan broj.");
+			return false;
+		}
+		for (Racun racun : racuni) {
+			if (racun.getBrojRacuna() == brojRacuna) {
+				System.out.println("Racun pod tim brojem vec postoji.");
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public static boolean provjeriRacun(int brojRacuna) { // provjerava da li racun postoji u sistemu

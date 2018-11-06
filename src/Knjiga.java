@@ -22,8 +22,35 @@ public class Knjiga {
 		this.brojKnjige = brojKnjige;
 		this.nazivKnjige = nazivKnjige;
 		this.statusKnjige = true;
-		listaKnjiga.add(this);
-		upisiUFile(this.brojKnjige, this.nazivKnjige);
+		listaKnjiga.add(this); // nakon kreiranja nova knjiga se dodaje u array list
+		upisiUFile(this.brojKnjige, this.nazivKnjige); // nakon kreiranja nova knjiga se dodaje u tekstualni file
+	}
+	
+	
+	// metoda kreirajKnjigu() provjerava da li su ispunjeni svi uslovi za kreiranje knjige, i tek ako jesu 
+	// poziva konstruktor i kreira novu knjigu
+	public static void kreirajKnjigu(int brojKnjige, String naziv) throws IOException {
+		if (validacijaBrojaKnjige(brojKnjige)) {
+			Knjiga knjiga = new Knjiga(brojKnjige,naziv);
+			System.out.println("Knjiga dodana u bazu i dostupna za preuzimanje.");
+		} else
+			System.out.println("Nemoguce dodati knjigu u bazu.");
+	}
+	
+	public static boolean validacijaBrojaKnjige(int brojKnjige) {
+		for ( Knjiga knjiga : listaKnjiga) {
+			if ( knjiga.getBrojKnjige() == brojKnjige) {
+				System.out.println("Broj knjige vec u upotrebi.");
+				return false;
+			}
+		}
+		if ( brojKnjige < 0) {
+			System.out.println("Broj knjige ne smije biti negativan broj.");
+			return false;
+		}
+		
+		return true;
+		
 	}
 
 	public static boolean provjeriDostupnostKnjige(int brojKnjige) { // provjerava da li je knjiga dostupna
@@ -64,11 +91,14 @@ public class Knjiga {
 		}
 	}
 	
+	// kreira file u koji ce upisati sve knjige dodane u biblioteku
 	public static void kreirajFile() {
 		
 		java.io.File file = new java.io.File("ListaKnjiga.txt");
 	}
 	
+	
+	// upisuje u file dodanu knjigu
 	public void upisiUFile(int brojKnjige, String nazivKnjige) throws IOException {
 		
 		try(FileWriter fw = new FileWriter("ListaKnjiga.txt", true);
@@ -84,6 +114,7 @@ public class Knjiga {
 			  
 	}
 	
+	// prilikom svakog izlaska iz aplikacije poziva se ova metoda, koja brise file u koji su pohranjene knjige
 	public static void izbrisiFile() throws IOException {
 		
 		Files.deleteIfExists(Paths.get("C:\\Users\\Nefisa\\eclipse-workspace\\ZadacaBiblioteka\\ListaKnjiga.txt"));
