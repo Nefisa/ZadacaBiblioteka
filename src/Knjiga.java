@@ -117,7 +117,7 @@ public class Knjiga {
 	// prilikom svakog izlaska iz aplikacije poziva se ova metoda, koja brise file u koji su pohranjene knjige
 	public static void izbrisiFile() throws IOException {
 		
-		Files.deleteIfExists(Paths.get("C:\\Users\\Nefisa\\eclipse-workspace\\ZadacaBiblioteka\\ListaKnjiga.txt"));
+		Files.deleteIfExists(Paths.get("ListaKnjiga.txt"));
 	}
 	
 

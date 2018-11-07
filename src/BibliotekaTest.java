@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -21,13 +22,14 @@ public class BibliotekaTest {
 		System.out.println("3. Podizanje knjige - postojeci korisnik ");
 		System.out.println("4. Vracanje knjige - postojeci korisnik ");
 		System.out.println("5. Ispis liste posudjenih i vracenih knjiga");
-		System.out.println("6. Izlazak iz aplikacije");
+		System.out.println("6. Motivaciona poruka");
+		System.out.println("7. Izlazak iz aplikacije");
 
 		int izbor = 0;
 		try {
 			izbor = input.nextInt();
 
-			while (izbor < 1 || izbor > 6) {
+			while (izbor < 1 || izbor > 7) {
 				System.out.println("Pogresan unos. Pokusajte ponovo.");
 				izbor = input.nextInt();
 			}
@@ -52,13 +54,16 @@ public class BibliotekaTest {
 			Biblioteka.ispisiListe();
 			break;
 		case 6:
+			motivacionaPoruka();
+			break;
+		case 7:
 			Knjiga.izbrisiFile();
 			break;
 		}
 
 	}
 
-	public static void noviKorisnik() throws IOException,InputMismatchException {
+	public static void noviKorisnik() throws IOException, InputMismatchException {
 
 		System.out.println("Unesite broj racuna: ");
 		int brojRacuna = input.nextInt();
@@ -71,7 +76,7 @@ public class BibliotekaTest {
 		bibliotekaTest();
 	}
 
-	public static void novaKnjiga() throws IOException, InputMismatchException{
+	public static void novaKnjiga() throws IOException, InputMismatchException {
 
 		System.out.println("Unesite broj knjige: ");
 		int brojKnjige = input.nextInt();
@@ -85,7 +90,7 @@ public class BibliotekaTest {
 
 	}
 
-	public static void podizanjeKnjige() throws IOException, InputMismatchException{
+	public static void podizanjeKnjige() throws IOException, InputMismatchException {
 
 		System.out.println("Unesite broj racuna: ");
 		int brojRacuna = input.nextInt();
@@ -110,4 +115,34 @@ public class BibliotekaTest {
 
 		bibliotekaTest();
 	}
-}
+
+	
+	// metoda motivacionaPoruka() bas i nema veze sa zadatkom, osim sto implementira citanje iz file-a
+	// u file pod nazivom Poruke je moguce dodavati motivacione poruke, i onda prilikom pozivanja metode
+	// sve poruke se spreme u Array listu, i korisniku se izbacuje jedna random motivaciona poruka :)
+	public static void motivacionaPoruka() throws IOException {
+
+		java.io.File poruke = new java.io.File("Poruke.txt");
+		
+		ArrayList<String> listaPoruka = new ArrayList<>();
+
+		try {
+			
+			Scanner citac = new Scanner(poruke);
+
+			while (citac.hasNext()) {
+				listaPoruka.add(citac.nextLine());
+			}
+			
+			citac.close();
+			
+			System.out.println(listaPoruka.get((int) (Math.random() * listaPoruka.size())));
+			
+		} catch (IOException e) {
+			
+			System.out.println("Motivacioni file vise ne postoji.");
+		}
+
+	bibliotekaTest();
+
+}}
